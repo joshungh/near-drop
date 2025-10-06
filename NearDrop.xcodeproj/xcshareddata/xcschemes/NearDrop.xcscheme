@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1500"
+   LastUpgradeVersion = "1620"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1AFFFFFD"
+               BlueprintIdentifier = "FF0001"
                BuildableName = "NearDrop.app"
                BlueprintName = "NearDrop"
                ReferencedContainer = "container:NearDrop.xcodeproj">
@@ -26,9 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -44,7 +43,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1AFFFFFD"
+            BlueprintIdentifier = "FF0001"
             BuildableName = "NearDrop.app"
             BlueprintName = "NearDrop"
             ReferencedContainer = "container:NearDrop.xcodeproj">
@@ -61,7 +60,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1AFFFFFD"
+            BlueprintIdentifier = "FF0001"
             BuildableName = "NearDrop.app"
             BlueprintName = "NearDrop"
             ReferencedContainer = "container:NearDrop.xcodeproj">

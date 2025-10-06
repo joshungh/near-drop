@@ -7,37 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A000001 /* NearDropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000000 /* NearDropApp.swift */; };
-		1A000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000002 /* ContentView.swift */; };
-		1A000005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A000004 /* Assets.xcassets */; };
-		1A000009 /* CryptoKitWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000008 /* CryptoKitWrapper.swift */; };
-		1A00000B /* PeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00000A /* PeerService.swift */; };
-		1A00000D /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00000C /* MessageStore.swift */; };
-		1A00000F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00000E /* Message.swift */; };
-		1A000011 /* DiscoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000010 /* DiscoveryView.swift */; };
-		1A000013 /* ChatsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000012 /* ChatsListView.swift */; };
-		1A000015 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000014 /* ChatView.swift */; };
-		1A000017 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000016 /* SettingsView.swift */; };
+		AA0001 /* NearDropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0001 /* NearDropApp.swift */; };
+		AA0002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0002 /* ContentView.swift */; };
+		AA0003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0003 /* Assets.xcassets */; };
+		AA0004 /* CryptoKitWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0004 /* CryptoKitWrapper.swift */; };
+		AA0005 /* PeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0005 /* PeerService.swift */; };
+		AA0006 /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0006 /* MessageStore.swift */; };
+		AA0007 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0007 /* Message.swift */; };
+		AA0008 /* DiscoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0008 /* DiscoveryView.swift */; };
+		AA0009 /* ChatsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0009 /* ChatsListView.swift */; };
+		AA0010 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0010 /* ChatView.swift */; };
+		AA0011 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0011 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A000000 /* NearDropApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearDropApp.swift; sourceTree = "<group>"; };
-		1A000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1A000004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1A000008 /* CryptoKitWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKitWrapper.swift; sourceTree = "<group>"; };
-		1A00000A /* PeerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerService.swift; sourceTree = "<group>"; };
-		1A00000C /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
-		1A00000E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		1A000010 /* DiscoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryView.swift; sourceTree = "<group>"; };
-		1A000012 /* ChatsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsListView.swift; sourceTree = "<group>"; };
-		1A000014 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		1A000016 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		1A000018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AFFFFFF /* NearDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB0001 /* NearDropApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearDropApp.swift; sourceTree = "<group>"; };
+		BB0002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BB0003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB0004 /* CryptoKitWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKitWrapper.swift; sourceTree = "<group>"; };
+		BB0005 /* PeerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerService.swift; sourceTree = "<group>"; };
+		BB0006 /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
+		BB0007 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		BB0008 /* DiscoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryView.swift; sourceTree = "<group>"; };
+		BB0009 /* ChatsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsListView.swift; sourceTree = "<group>"; };
+		BB0010 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		BB0011 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BB0012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC0001 /* NearDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1AFFFFFE /* Frameworks */ = {
+		DD0001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,91 +47,91 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1AFFFFFA /* NearDrop */ = {
+		EE0001 = {
 			isa = PBXGroup;
 			children = (
-				1A000018 /* Info.plist */,
-				1A000000 /* NearDropApp.swift */,
-				1AFFFFF7 /* Core */,
-				1AFFFFF8 /* Services */,
-				1AFFFFF9 /* Models */,
-				1AFFFFF6 /* Views */,
-				1AFFFFF5 /* Resources */,
+				EE0002 /* NearDrop */,
+				EE0003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EE0002 /* NearDrop */ = {
+			isa = PBXGroup;
+			children = (
+				BB0012 /* Info.plist */,
+				BB0001 /* NearDropApp.swift */,
+				EE0004 /* Core */,
+				EE0005 /* Services */,
+				EE0006 /* Models */,
+				EE0007 /* Views */,
+				EE0008 /* Resources */,
 			);
 			path = NearDrop;
 			sourceTree = "<group>";
 		};
-		1AFFFFF5 /* Resources */ = {
+		EE0003 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1A000004 /* Assets.xcassets */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		1AFFFFF6 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				1A000002 /* ContentView.swift */,
-				1A000010 /* DiscoveryView.swift */,
-				1A000012 /* ChatsListView.swift */,
-				1A000014 /* ChatView.swift */,
-				1A000016 /* SettingsView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		1AFFFFF7 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				1A000008 /* CryptoKitWrapper.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		1AFFFFF8 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				1A00000A /* PeerService.swift */,
-				1A00000C /* MessageStore.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		1AFFFFF9 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				1A00000E /* Message.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		1AFFFFFB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1AFFFFFF /* NearDrop.app */,
+				CC0001 /* NearDrop.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1AFFFFFC = {
+		EE0004 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				1AFFFFFA /* NearDrop */,
-				1AFFFFFB /* Products */,
+				BB0004 /* CryptoKitWrapper.swift */,
 			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EE0005 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BB0005 /* PeerService.swift */,
+				BB0006 /* MessageStore.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EE0006 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BB0007 /* Message.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EE0007 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB0002 /* ContentView.swift */,
+				BB0008 /* DiscoveryView.swift */,
+				BB0009 /* ChatsListView.swift */,
+				BB0010 /* ChatView.swift */,
+				BB0011 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EE0008 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BB0003 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1AFFFFFD /* NearDrop */ = {
+		FF0001 /* NearDrop */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1AFFFFF0 /* Build configuration list for PBXNativeTarget "NearDrop" */;
+			buildConfigurationList = FF0002 /* Build configuration list for PBXNativeTarget "NearDrop" */;
 			buildPhases = (
-				1AFFFFFC /* Sources */,
-				1AFFFFFE /* Frameworks */,
-				1AFFFFFF9 /* Resources */,
+				FF0003 /* Sources */,
+				DD0001 /* Frameworks */,
+				FF0004 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -139,25 +139,25 @@
 			);
 			name = NearDrop;
 			productName = NearDrop;
-			productReference = 1AFFFFFF /* NearDrop.app */;
+			productReference = CC0001 /* NearDrop.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		1AFFFFF1 /* Project object */ = {
+		GG0001 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					1AFFFFFD = {
-						CreatedOnToolsVersion = 15.0;
+					FF0001 = {
+						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
-			buildConfigurationList = 1AFFFFF2 /* Build configuration list for PBXProject "NearDrop" */;
+			buildConfigurationList = GG0002 /* Build configuration list for PBXProject "NearDrop" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -165,49 +165,49 @@
 				en,
 				Base,
 			);
-			mainGroup = 1AFFFFFC;
-			productRefGroup = 1AFFFFFB /* Products */;
+			mainGroup = EE0001;
+			productRefGroup = EE0003 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1AFFFFFD /* NearDrop */,
+				FF0001 /* NearDrop */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1AFFFFFF9 /* Resources */ = {
+		FF0004 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A000005 /* Assets.xcassets in Resources */,
+				AA0003 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1AFFFFFC /* Sources */ = {
+		FF0003 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A000001 /* NearDropApp.swift in Sources */,
-				1A000003 /* ContentView.swift in Sources */,
-				1A000009 /* CryptoKitWrapper.swift in Sources */,
-				1A00000B /* PeerService.swift in Sources */,
-				1A00000D /* MessageStore.swift in Sources */,
-				1A00000F /* Message.swift in Sources */,
-				1A000011 /* DiscoveryView.swift in Sources */,
-				1A000013 /* ChatsListView.swift in Sources */,
-				1A000015 /* ChatView.swift in Sources */,
-				1A000017 /* SettingsView.swift in Sources */,
+				AA0001 /* NearDropApp.swift in Sources */,
+				AA0002 /* ContentView.swift in Sources */,
+				AA0004 /* CryptoKitWrapper.swift in Sources */,
+				AA0005 /* PeerService.swift in Sources */,
+				AA0006 /* MessageStore.swift in Sources */,
+				AA0007 /* Message.swift in Sources */,
+				AA0008 /* DiscoveryView.swift in Sources */,
+				AA0009 /* ChatsListView.swift in Sources */,
+				AA0010 /* ChatView.swift in Sources */,
+				AA0011 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		1AFFFFF3 /* Debug */ = {
+		HH0001 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -270,7 +270,7 @@
 			};
 			name = Debug;
 		};
-		1AFFFFF4 /* Release */ = {
+		HH0002 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -326,7 +326,7 @@
 			};
 			name = Release;
 		};
-		1AFFFFEE /* Debug */ = {
+		HH0003 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -358,7 +358,7 @@
 			};
 			name = Debug;
 		};
-		1AFFFFEF /* Release */ = {
+		HH0004 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -393,25 +393,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1AFFFFF0 /* Build configuration list for PBXNativeTarget "NearDrop" */ = {
+		FF0002 /* Build configuration list for PBXNativeTarget "NearDrop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1AFFFFEE /* Debug */,
-				1AFFFFEF /* Release */,
+				HH0003 /* Debug */,
+				HH0004 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1AFFFFF2 /* Build configuration list for PBXProject "NearDrop" */ = {
+		GG0002 /* Build configuration list for PBXProject "NearDrop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1AFFFFF3 /* Debug */,
-				1AFFFFF4 /* Release */,
+				HH0001 /* Debug */,
+				HH0002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 1AFFFFF1 /* Project object */;
+	rootObject = GG0001 /* Project object */;
 }
