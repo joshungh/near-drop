@@ -107,7 +107,6 @@ struct SettingsView: View {
                                                 .font(.system(size: 18))
                                                 .foregroundColor(Color.black)
                                         }
-                                        .glow(color: Theme.Colors.success, radius: 6)
 
                                         VStack(alignment: .leading, spacing: 4) {
                                             Text(peer.displayName)

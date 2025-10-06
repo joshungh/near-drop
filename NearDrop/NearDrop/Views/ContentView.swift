@@ -57,7 +57,6 @@ struct ModernTabBar: View {
                         .fill(Theme.Colors.primary)
                         .frame(width: 8, height: 8)
                         .offset(x: 8, y: 12)
-                        .glow(color: Theme.Colors.primary, radius: 4)
                 }
             }
 
@@ -96,7 +95,6 @@ struct TabBarButton: View {
                 Image(systemName: icon)
                     .font(.system(size: 22))
                     .foregroundColor(isSelected ? Theme.Colors.primary : Theme.Colors.textTertiary)
-                    .glow(color: isSelected ? Theme.Colors.primary : .clear, radius: 6)
 
                 Text(title)
                     .font(Theme.Typography.caption2)

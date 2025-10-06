@@ -120,7 +120,6 @@ struct ModernChatListRow: View {
                     .font(.system(size: 22))
                     .foregroundColor(Color.black)
             }
-            .glow(color: Theme.Colors.success, radius: 6)
 
             // Info
             VStack(alignment: .leading, spacing: 6) {

@@ -40,7 +40,6 @@ struct ChatView: View {
                             .font(.system(size: 18))
                             .foregroundColor(Color.black)
                     }
-                    .glow(color: Theme.Colors.success, radius: 6)
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text(peer.displayName)
@@ -66,7 +65,6 @@ struct ChatView: View {
                         Image(systemName: "checkmark.shield.fill")
                             .font(.system(size: 22))
                             .foregroundColor(Theme.Colors.primary)
-                            .glow(color: Theme.Colors.primary, radius: 4)
                     }
                 }
                 .padding(Theme.Spacing.md)
@@ -124,10 +122,6 @@ struct ChatView: View {
                                 .font(.system(size: 18, weight: .bold))
                                 .foregroundColor(messageText.isEmpty ? Theme.Colors.textTertiary : Color.black)
                         }
-                        .glow(
-                            color: messageText.isEmpty ? .clear : Theme.Colors.primary,
-                            radius: 8
-                        )
                     }
                     .disabled(messageText.isEmpty)
                 }
@@ -258,7 +252,6 @@ struct ModernSafetyCodeView: View {
                         Image(systemName: "checkmark.shield.fill")
                             .font(.system(size: 60))
                             .foregroundColor(Theme.Colors.success)
-                            .glow(color: Theme.Colors.success, radius: 20)
                     }
 
                     VStack(spacing: Theme.Spacing.sm) {
@@ -281,13 +274,12 @@ struct ModernSafetyCodeView: View {
                     // Safety code
                     VStack(spacing: Theme.Spacing.sm) {
                         Text(safetyCode)
-                            .font(Theme.Typography.monoLarge)
+                            .font(.system(size: 24, weight: .bold, design: .monospaced))
                             .foregroundColor(Theme.Colors.primary)
                             .tracking(4)
                             .padding(Theme.Spacing.lg)
                             .background(Theme.Colors.surface)
                             .cornerRadius(Theme.CornerRadius.md)
-                            .glow(color: Theme.Colors.primary, radius: 8)
 
                         HStack(spacing: 8) {
                             Image(systemName: "lock.shield.fill")
