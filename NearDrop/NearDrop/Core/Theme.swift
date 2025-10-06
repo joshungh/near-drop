@@ -1,7 +1,17 @@
 import SwiftUI
 
-// Ultra-minimal, sleek design - modern iOS style
+// Ultra-minimal, sleek design - fully responsive
 struct Theme {
+
+    // MARK: - Device Detection
+
+    static var isSmallDevice: Bool {
+        UIScreen.main.bounds.width <= 375 // iPhone SE, 12/13 mini
+    }
+
+    static var isLargeDevice: Bool {
+        UIScreen.main.bounds.width >= 428 // iPhone Pro Max, iPad
+    }
 
     // MARK: - Colors
 
@@ -32,11 +42,15 @@ struct Theme {
         static let divider = Color(red: 0.94, green: 0.94, blue: 0.96)
     }
 
-    // MARK: - Typography - Smaller, tighter
+    // MARK: - Typography - Responsive
 
     struct Typography {
-        static let largeTitle = Font.system(size: 26, weight: .bold)
-        static let title = Font.system(size: 20, weight: .bold)
+        static var largeTitle: Font {
+            isSmallDevice ? .system(size: 24, weight: .bold) : .system(size: 26, weight: .bold)
+        }
+        static var title: Font {
+            isSmallDevice ? .system(size: 18, weight: .bold) : .system(size: 20, weight: .bold)
+        }
         static let title2 = Font.system(size: 17, weight: .semibold)
         static let headline = Font.system(size: 15, weight: .semibold)
         static let body = Font.system(size: 15, weight: .regular)
@@ -47,18 +61,18 @@ struct Theme {
         static let caption2 = Font.system(size: 10, weight: .regular)
     }
 
-    // MARK: - Spacing - Tighter, minimal
+    // MARK: - Spacing - Responsive
 
     struct Spacing {
         static let xs: CGFloat = 2
-        static let sm: CGFloat = 6
-        static let md: CGFloat = 10
-        static let lg: CGFloat = 14
-        static let xl: CGFloat = 18
-        static let xxl: CGFloat = 24
+        static var sm: CGFloat { isSmallDevice ? 4 : 6 }
+        static var md: CGFloat { isSmallDevice ? 8 : 10 }
+        static var lg: CGFloat { isSmallDevice ? 12 : 14 }
+        static var xl: CGFloat { isSmallDevice ? 16 : 18 }
+        static var xxl: CGFloat { isSmallDevice ? 20 : 24 }
     }
 
-    // MARK: - Corner Radius - Subtle
+    // MARK: - Corner Radius
 
     struct CornerRadius {
         static let xs: CGFloat = 4
@@ -67,6 +81,20 @@ struct Theme {
         static let lg: CGFloat = 14
         static let xl: CGFloat = 18
         static let full: CGFloat = 999
+    }
+
+    // MARK: - Sizes - Responsive
+
+    struct Sizes {
+        static var avatarSmall: CGFloat { isSmallDevice ? 40 : 44 }
+        static var avatarMedium: CGFloat { isSmallDevice ? 48 : 56 }
+        static var avatarLarge: CGFloat { isSmallDevice ? 70 : 80 }
+
+        static var iconSmall: CGFloat { isSmallDevice ? 16 : 18 }
+        static var iconMedium: CGFloat { isSmallDevice ? 28 : 32 }
+        static var iconLarge: CGFloat { isSmallDevice ? 44 : 50 }
+
+        static var buttonHeight: CGFloat { isSmallDevice ? 44 : 48 }
     }
 }
 
@@ -89,9 +117,32 @@ struct PrimaryButtonStyle: ViewModifier {
             .font(Theme.Typography.headline)
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 11)
+            .frame(height: Theme.Sizes.buttonHeight)
             .background(isEnabled ? Theme.Colors.primary : Theme.Colors.textTertiary)
             .cornerRadius(Theme.CornerRadius.md)
+    }
+}
+
+struct ResponsiveHStack<Content: View>: View {
+    let content: Content
+
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+    var body: some View {
+        GeometryReader { geometry in
+            if geometry.size.width > 768 {
+                HStack {
+                    Spacer()
+                    content
+                        .frame(maxWidth: 600)
+                    Spacer()
+                }
+            } else {
+                content
+            }
+        }
     }
 }
 
@@ -102,5 +153,10 @@ extension View {
 
     func primaryButton(enabled: Bool = true) -> some View {
         modifier(PrimaryButtonStyle(isEnabled: enabled))
+    }
+
+    // Responsive max width for iPad
+    func responsiveWidth() -> some View {
+        frame(maxWidth: Theme.isLargeDevice ? 600 : .infinity)
     }
 }

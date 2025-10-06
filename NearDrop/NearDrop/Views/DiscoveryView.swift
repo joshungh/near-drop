@@ -51,10 +51,10 @@ struct DiscoveryView: View {
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing
                                         ))
-                                        .frame(width: 80, height: 80)
+                                        .frame(width: Theme.Sizes.avatarLarge, height: Theme.Sizes.avatarLarge)
 
                                     Image(systemName: "antenna.radiowaves.left.and.right")
-                                        .font(.system(size: 32))
+                                        .font(.system(size: Theme.Sizes.iconMedium))
                                         .foregroundColor(.white)
                                 }
 
@@ -145,10 +145,10 @@ struct PeerRow: View {
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     ))
-                    .frame(width: 44, height: 44)
+                    .frame(width: Theme.Sizes.avatarSmall, height: Theme.Sizes.avatarSmall)
 
                 Text(String(peer.displayName.prefix(1).uppercased()))
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.system(size: Theme.Sizes.iconSmall, weight: .semibold))
                     .foregroundColor(.white)
             }
 
