@@ -1,60 +1,62 @@
 import SwiftUI
 
-// Modern spy-themed design system
+// Modern social media-inspired design system (Twitter/Instagram/Threads aesthetic)
 struct Theme {
 
     // MARK: - Colors
 
     struct Colors {
-        // Primary palette - dark, sophisticated spy theme
-        static let background = Color(red: 0.08, green: 0.09, blue: 0.12) // Almost black
-        static let surface = Color(red: 0.12, green: 0.14, blue: 0.18) // Dark card background
-        static let surfaceElevated = Color(red: 0.16, green: 0.18, blue: 0.22)
+        // Light, clean backgrounds
+        static let background = Color(red: 0.98, green: 0.98, blue: 1.0) // Almost white with slight blue tint
+        static let surface = Color.white
+        static let surfaceSecondary = Color(red: 0.96, green: 0.96, blue: 0.98)
 
-        // Accent - stealth green with mystery
-        static let primary = Color(red: 0.2, green: 0.95, blue: 0.6) // Bright matrix green
-        static let primaryDim = Color(red: 0.15, green: 0.7, blue: 0.45)
+        // Modern vibrant accent - Instagram gradient inspired
+        static let primary = Color(red: 0.0, green: 0.48, blue: 1.0) // Bright iOS blue
+        static let primaryLight = Color(red: 0.4, green: 0.7, blue: 1.0)
 
-        // Secondary - subtle blue for contrast
-        static let secondary = Color(red: 0.3, green: 0.7, blue: 0.95)
-        static let secondaryDim = Color(red: 0.2, green: 0.5, blue: 0.7)
+        // Secondary accent - purple for variety
+        static let secondary = Color(red: 0.58, green: 0.4, blue: 0.95) // Vibrant purple
+        static let secondaryLight = Color(red: 0.7, green: 0.6, blue: 1.0)
 
-        // Status colors
-        static let success = Color(red: 0.2, green: 0.95, blue: 0.6)
-        static let warning = Color(red: 0.95, green: 0.7, blue: 0.2)
-        static let danger = Color(red: 0.95, green: 0.3, blue: 0.3)
+        // Status colors - modern and friendly
+        static let success = Color(red: 0.2, green: 0.78, blue: 0.35) // Fresh green
+        static let warning = Color(red: 1.0, green: 0.58, blue: 0.0) // Warm orange
+        static let danger = Color(red: 1.0, green: 0.23, blue: 0.19) // Bright red
 
-        // Text
-        static let textPrimary = Color.white
-        static let textSecondary = Color(white: 0.7)
-        static let textTertiary = Color(white: 0.5)
+        // Text - high contrast for readability
+        static let textPrimary = Color(red: 0.1, green: 0.1, blue: 0.1) // Near black
+        static let textSecondary = Color(red: 0.45, green: 0.45, blue: 0.47) // Gray
+        static let textTertiary = Color(red: 0.7, green: 0.7, blue: 0.72) // Light gray
 
-        // Message bubbles
+        // Message bubbles - like iMessage
         static let messageSent = LinearGradient(
-            colors: [Color(red: 0.2, green: 0.95, blue: 0.6), Color(red: 0.15, green: 0.75, blue: 0.5)],
+            colors: [Color(red: 0.0, green: 0.48, blue: 1.0), Color(red: 0.3, green: 0.6, blue: 1.0)],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
-        static let messageReceived = Color(red: 0.16, green: 0.18, blue: 0.22)
+        static let messageReceived = Color(red: 0.92, green: 0.92, blue: 0.94)
+
+        // Borders and dividers
+        static let border = Color(red: 0.88, green: 0.88, blue: 0.9)
+        static let divider = Color(red: 0.92, green: 0.92, blue: 0.94)
     }
 
     // MARK: - Typography
 
     struct Typography {
-        static let largeTitle = Font.system(size: 34, weight: .bold, design: .rounded)
-        static let title = Font.system(size: 28, weight: .semibold, design: .rounded)
-        static let title2 = Font.system(size: 22, weight: .semibold, design: .rounded)
-        static let headline = Font.system(size: 17, weight: .semibold, design: .rounded)
-        static let body = Font.system(size: 17, weight: .regular, design: .default)
-        static let callout = Font.system(size: 16, weight: .regular, design: .default)
-        static let subheadline = Font.system(size: 15, weight: .regular, design: .default)
-        static let footnote = Font.system(size: 13, weight: .regular, design: .default)
-        static let caption = Font.system(size: 12, weight: .regular, design: .default)
-        static let caption2 = Font.system(size: 11, weight: .regular, design: .default)
-
-        // Monospace for codes
-        static let mono = Font.system(size: 17, weight: .medium, design: .monospaced)
-        static let monoLarge = Font.system(size: 24, weight: .bold, design: .monospaced)
+        // San Francisco font (iOS default) - clean and modern
+        static let largeTitle = Font.system(size: 34, weight: .bold)
+        static let title = Font.system(size: 28, weight: .bold)
+        static let title2 = Font.system(size: 22, weight: .bold)
+        static let title3 = Font.system(size: 20, weight: .semibold)
+        static let headline = Font.system(size: 17, weight: .semibold)
+        static let body = Font.system(size: 17, weight: .regular)
+        static let callout = Font.system(size: 16, weight: .regular)
+        static let subheadline = Font.system(size: 15, weight: .regular)
+        static let footnote = Font.system(size: 13, weight: .regular)
+        static let caption = Font.system(size: 12, weight: .regular)
+        static let caption2 = Font.system(size: 11, weight: .regular)
     }
 
     // MARK: - Spacing
@@ -71,19 +73,20 @@ struct Theme {
     // MARK: - Corner Radius
 
     struct CornerRadius {
+        static let xs: CGFloat = 4
         static let sm: CGFloat = 8
         static let md: CGFloat = 12
         static let lg: CGFloat = 16
-        static let xl: CGFloat = 24
+        static let xl: CGFloat = 20
         static let full: CGFloat = 999
     }
 
     // MARK: - Shadows
 
     struct Shadows {
-        static let small = Shadow(color: Color.black.opacity(0.3), radius: 4, y: 2)
-        static let medium = Shadow(color: Color.black.opacity(0.4), radius: 8, y: 4)
-        static let large = Shadow(color: Color.black.opacity(0.5), radius: 16, y: 8)
+        static let light = Shadow(color: Color.black.opacity(0.05), radius: 4, y: 2)
+        static let medium = Shadow(color: Color.black.opacity(0.08), radius: 8, y: 4)
+        static let large = Shadow(color: Color.black.opacity(0.1), radius: 16, y: 8)
 
         struct Shadow {
             let color: Color
@@ -108,36 +111,24 @@ struct CardStyle: ViewModifier {
         content
             .background(Theme.Colors.surface)
             .cornerRadius(Theme.CornerRadius.md)
-            .shadow(color: Color.black.opacity(0.3), radius: 8, y: 4)
+            .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 2)
     }
 }
 
-struct GlowEffect: ViewModifier {
-    let color: Color
-    let radius: CGFloat
+struct PrimaryButtonStyle: ViewModifier {
+    let isEnabled: Bool
 
     func body(content: Content) -> some View {
         content
-            .shadow(color: color.opacity(0.6), radius: radius)
-            .shadow(color: color.opacity(0.4), radius: radius * 2)
-    }
-}
-
-struct PulseEffect: ViewModifier {
-    @State private var isPulsing = false
-
-    func body(content: Content) -> some View {
-        content
-            .scaleEffect(isPulsing ? 1.05 : 1.0)
-            .opacity(isPulsing ? 0.8 : 1.0)
-            .animation(
-                Animation.easeInOut(duration: 1.5)
-                    .repeatForever(autoreverses: true),
-                value: isPulsing
+            .font(Theme.Typography.headline)
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
+            .background(
+                isEnabled ? Theme.Colors.primary : Theme.Colors.textTertiary
             )
-            .onAppear {
-                isPulsing = true
-            }
+            .cornerRadius(Theme.CornerRadius.lg)
+            .shadow(color: Theme.Colors.primary.opacity(isEnabled ? 0.3 : 0), radius: 8, y: 4)
     }
 }
 
@@ -146,11 +137,7 @@ extension View {
         modifier(CardStyle())
     }
 
-    func glow(color: Color = Theme.Colors.primary, radius: CGFloat = 8) -> some View {
-        modifier(GlowEffect(color: color, radius: radius))
-    }
-
-    func pulse() -> some View {
-        modifier(PulseEffect())
+    func primaryButton(enabled: Bool = true) -> some View {
+        modifier(PrimaryButtonStyle(isEnabled: enabled))
     }
 }

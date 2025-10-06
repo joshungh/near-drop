@@ -7,183 +7,148 @@ struct DiscoveryView: View {
 
     var body: some View {
         ZStack {
-            // Background
             Theme.Colors.background
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                // Header
-                VStack(spacing: Theme.Spacing.sm) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("DISCOVERY")
-                                .font(Theme.Typography.caption)
-                                .foregroundColor(Theme.Colors.textTertiary)
-                                .tracking(2)
-
-                            Text("Secure Network Scan")
-                                .font(Theme.Typography.title2)
-                                .foregroundColor(Theme.Colors.textPrimary)
-                        }
-
-                        Spacer()
-
-                        // Status indicator
-                        if isDiscovering {
-                            HStack(spacing: 6) {
-                                Circle()
-                                    .fill(Theme.Colors.success)
-                                    .frame(width: 8, height: 8)
-                                    .pulse()
-
-                                Text("SCANNING")
-                                    .font(Theme.Typography.caption2)
-                                    .foregroundColor(Theme.Colors.success)
-                                    .tracking(1)
-                            }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(Theme.Colors.success.opacity(0.15))
-                            .cornerRadius(Theme.CornerRadius.full)
-                        }
+                // Modern header
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Discover")
+                            .font(Theme.Typography.largeTitle)
+                            .foregroundColor(Theme.Colors.textPrimary)
                     }
-                    .padding(.horizontal, Theme.Spacing.lg)
-                    .padding(.top, Theme.Spacing.md)
+
+                    Spacer()
+
+                    if isDiscovering {
+                        HStack(spacing: 6) {
+                            ProgressView()
+                                .scaleEffect(0.8)
+
+                            Text("Scanning...")
+                                .font(Theme.Typography.subheadline)
+                                .foregroundColor(Theme.Colors.textSecondary)
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(Theme.Colors.surfaceSecondary)
+                        .cornerRadius(Theme.CornerRadius.full)
+                    }
                 }
+                .padding(.horizontal, Theme.Spacing.lg)
+                .padding(.top, Theme.Spacing.md)
+                .padding(.bottom, Theme.Spacing.sm)
 
-                if isDiscovering {
-                    if peerService.discoveredPeers.isEmpty {
-                        // Scanning state
-                        VStack(spacing: Theme.Spacing.xl) {
-                            Spacer()
+                ScrollView {
+                    VStack(spacing: Theme.Spacing.lg) {
+                        if !isDiscovering {
+                            // Onboarding state
+                            VStack(spacing: Theme.Spacing.xl) {
+                                Spacer()
 
-                            ZStack {
-                                // Radar rings
-                                ForEach(0..<3) { index in
+                                // Icon
+                                ZStack {
                                     Circle()
-                                        .stroke(Theme.Colors.primary.opacity(0.3), lineWidth: 2)
-                                        .frame(width: 200 + CGFloat(index * 40))
-                                        .scaleEffect(isDiscovering ? 1.0 : 0.5)
-                                        .opacity(isDiscovering ? 0.0 : 1.0)
-                                        .animation(
-                                            Animation.easeOut(duration: 2.0)
-                                                .repeatForever(autoreverses: false)
-                                                .delay(Double(index) * 0.4),
-                                            value: isDiscovering
+                                        .fill(
+                                            LinearGradient(
+                                                colors: [Theme.Colors.primary, Theme.Colors.secondary],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
                                         )
+                                        .frame(width: 120, height: 120)
+
+                                    Image(systemName: "antenna.radiowaves.left.and.right")
+                                        .font(.system(size: 50))
+                                        .foregroundColor(.white)
+                                }
+                                .shadow(color: Theme.Colors.primary.opacity(0.3), radius: 20, y: 10)
+
+                                VStack(spacing: Theme.Spacing.sm) {
+                                    Text("Find Nearby Devices")
+                                        .font(Theme.Typography.title)
+                                        .foregroundColor(Theme.Colors.textPrimary)
+
+                                    Text("Connect securely with people around you using end-to-end encryption")
+                                        .font(Theme.Typography.body)
+                                        .foregroundColor(Theme.Colors.textSecondary)
+                                        .multilineTextAlignment(.center)
+                                        .padding(.horizontal, Theme.Spacing.xl)
                                 }
 
-                                // Center icon
-                                Image(systemName: "antenna.radiowaves.left.and.right")
-                                    .font(.system(size: 60))
-                                    .foregroundColor(Theme.Colors.primary)
-                                    .glow(color: Theme.Colors.primary, radius: 20)
+                                Spacer()
                             }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, Theme.Spacing.xxl)
+                        } else if peerService.discoveredPeers.isEmpty {
+                            // Scanning empty state
+                            VStack(spacing: Theme.Spacing.lg) {
+                                Spacer()
 
-                            VStack(spacing: Theme.Spacing.sm) {
-                                Text("Scanning for devices...")
-                                    .font(Theme.Typography.headline)
+                                ProgressView()
+                                    .scaleEffect(1.5)
+                                    .padding(.bottom, Theme.Spacing.lg)
+
+                                Text("Looking for devices...")
+                                    .font(Theme.Typography.title3)
                                     .foregroundColor(Theme.Colors.textPrimary)
 
-                                Text("Looking for nearby encrypted nodes")
-                                    .font(Theme.Typography.caption)
+                                Text("Make sure both devices have NearDrop open")
+                                    .font(Theme.Typography.subheadline)
                                     .foregroundColor(Theme.Colors.textSecondary)
-                            }
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal, Theme.Spacing.xl)
 
-                            Spacer()
-                        }
-                    } else {
-                        // Devices list
-                        ScrollView {
+                                Spacer()
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, Theme.Spacing.xxl)
+                        } else {
+                            // Devices list
                             VStack(spacing: Theme.Spacing.md) {
                                 ForEach(peerService.discoveredPeers, id: \.self) { peer in
                                     ModernPeerRow(peer: peer)
                                 }
                             }
-                            .padding(Theme.Spacing.lg)
+                            .padding(.top, Theme.Spacing.md)
                         }
-                    }
-                } else {
-                    // Initial state
-                    VStack(spacing: Theme.Spacing.xl) {
-                        Spacer()
-
-                        VStack(spacing: Theme.Spacing.lg) {
-                            Image(systemName: "lock.shield")
-                                .font(.system(size: 80))
-                                .foregroundColor(Theme.Colors.primary)
-                                .glow(color: Theme.Colors.primary, radius: 15)
-
-                            VStack(spacing: Theme.Spacing.sm) {
-                                Text("Encrypted P2P Network")
-                                    .font(Theme.Typography.title)
-                                    .foregroundColor(Theme.Colors.textPrimary)
-
-                                Text("Military-grade encryption • Zero trust architecture • No servers")
-                                    .font(Theme.Typography.caption)
-                                    .foregroundColor(Theme.Colors.textSecondary)
-                                    .multilineTextAlignment(.center)
-                                    .padding(.horizontal, Theme.Spacing.xl)
-                            }
-                        }
-
-                        Spacer()
-
-                        // Start button
-                        Button(action: startDiscovery) {
-                            HStack(spacing: Theme.Spacing.sm) {
-                                Image(systemName: "antenna.radiowaves.left.and.right")
-                                    .font(.system(size: 20))
-
-                                Text("INITIATE SCAN")
-                                    .font(Theme.Typography.headline)
-                                    .tracking(1)
-                            }
-                            .foregroundColor(Color.black)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, Theme.Spacing.md)
-                            .background(Theme.Colors.primary)
-                            .cornerRadius(Theme.CornerRadius.md)
-                            .glow(color: Theme.Colors.primary, radius: 10)
-                        }
-                        .padding(.horizontal, Theme.Spacing.lg)
-                        .padding(.bottom, Theme.Spacing.xl)
-                    }
-                }
-
-                // Stop button (when scanning)
-                if isDiscovering {
-                    Button(action: stopDiscovery) {
-                        HStack(spacing: Theme.Spacing.sm) {
-                            Image(systemName: "stop.circle.fill")
-                            Text("TERMINATE SCAN")
-                                .font(Theme.Typography.callout)
-                                .tracking(1)
-                        }
-                        .foregroundColor(Theme.Colors.danger)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, Theme.Spacing.md)
-                        .background(Theme.Colors.danger.opacity(0.15))
-                        .cornerRadius(Theme.CornerRadius.md)
                     }
                     .padding(.horizontal, Theme.Spacing.lg)
-                    .padding(.bottom, Theme.Spacing.lg)
                 }
+
+                // Action button
+                VStack(spacing: 0) {
+                    Divider()
+                        .background(Theme.Colors.divider)
+
+                    Button(action: {
+                        withAnimation(.spring(response: 0.3)) {
+                            if isDiscovering {
+                                stopDiscovery()
+                            } else {
+                                startDiscovery()
+                            }
+                        }
+                    }) {
+                        Text(isDiscovering ? "Stop Scanning" : "Start Scanning")
+                            .primaryButton(enabled: true)
+                    }
+                    .padding(Theme.Spacing.lg)
+                }
+                .background(Theme.Colors.surface)
             }
         }
+        .navigationBarHidden(true)
     }
 
     private func startDiscovery() {
-        withAnimation(.spring()) {
-            isDiscovering = true
-        }
+        isDiscovering = true
         peerService.startDiscovery()
     }
 
     private func stopDiscovery() {
-        withAnimation(.spring()) {
-            isDiscovering = false
-        }
+        isDiscovering = false
         peerService.stopDiscovery()
     }
 }
@@ -203,18 +168,17 @@ struct ModernPeerRow: View {
                 Circle()
                     .fill(
                         LinearGradient(
-                            colors: [Theme.Colors.primary, Theme.Colors.secondary],
+                            colors: [Theme.Colors.primaryLight, Theme.Colors.secondaryLight],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
-                    .frame(width: 50, height: 50)
+                    .frame(width: 56, height: 56)
 
-                Image(systemName: "person.fill")
-                    .font(.system(size: 22))
-                    .foregroundColor(Color.black)
+                Text(String(peer.displayName.prefix(1).uppercased()))
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundColor(.white)
             }
-            .glow(color: isConnected ? Theme.Colors.success : Theme.Colors.primary, radius: 8)
 
             // Info
             VStack(alignment: .leading, spacing: 4) {
@@ -224,37 +188,30 @@ struct ModernPeerRow: View {
 
                 HStack(spacing: 6) {
                     Circle()
-                        .fill(isConnected ? Theme.Colors.success : Theme.Colors.warning)
+                        .fill(isConnected ? Theme.Colors.success : Theme.Colors.textTertiary)
                         .frame(width: 6, height: 6)
 
-                    Text(isConnected ? "CONNECTED" : "AVAILABLE")
-                        .font(Theme.Typography.caption2)
-                        .foregroundColor(isConnected ? Theme.Colors.success : Theme.Colors.warning)
-                        .tracking(1)
+                    Text(isConnected ? "Connected" : "Available")
+                        .font(Theme.Typography.caption)
+                        .foregroundColor(Theme.Colors.textSecondary)
                 }
             }
 
             Spacer()
 
-            // Action button
+            // Action
             if !isConnected {
                 Button(action: { peerService.invitePeer(peer) }) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "lock.fill")
-                            .font(.system(size: 12))
-
-                        Text("CONNECT")
-                            .font(Theme.Typography.caption)
-                            .tracking(1)
-                    }
-                    .foregroundColor(Color.black)
-                    .padding(.horizontal, Theme.Spacing.md)
-                    .padding(.vertical, Theme.Spacing.sm)
-                    .background(Theme.Colors.primary)
-                    .cornerRadius(Theme.CornerRadius.sm)
+                    Text("Connect")
+                        .font(Theme.Typography.subheadline.weight(.semibold))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 10)
+                        .background(Theme.Colors.primary)
+                        .cornerRadius(Theme.CornerRadius.full)
                 }
             } else {
-                Image(systemName: "checkmark.shield.fill")
+                Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 24))
                     .foregroundColor(Theme.Colors.success)
             }
