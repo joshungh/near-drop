@@ -15,55 +15,129 @@ struct ChatView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Messages List
-            ScrollViewReader { proxy in
-                ScrollView {
-                    LazyVStack(spacing: 12) {
-                        ForEach(messages) { message in
-                            MessageBubble(message: message, isFromCurrentUser: message.sender != peer.displayName)
+        ZStack {
+            Theme.Colors.background
+                .ignoresSafeArea()
+
+            VStack(spacing: 0) {
+                // Custom Header
+                HStack(spacing: Theme.Spacing.md) {
+                    // Back button (if needed in NavigationView context)
+
+                    // Peer info
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [Theme.Colors.primary, Theme.Colors.secondary],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .frame(width: 40, height: 40)
+
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 18))
+                            .foregroundColor(Color.black)
+                    }
+                    .glow(color: Theme.Colors.success, radius: 6)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(peer.displayName)
+                            .font(Theme.Typography.headline)
+                            .foregroundColor(Theme.Colors.textPrimary)
+
+                        HStack(spacing: 4) {
+                            Circle()
+                                .fill(Theme.Colors.success)
+                                .frame(width: 6, height: 6)
+
+                            Text("ENCRYPTED")
+                                .font(Theme.Typography.caption2)
+                                .foregroundColor(Theme.Colors.success)
+                                .tracking(1)
+                        }
+                    }
+
+                    Spacer()
+
+                    // Safety code button
+                    Button(action: { showSafetyCode.toggle() }) {
+                        Image(systemName: "checkmark.shield.fill")
+                            .font(.system(size: 22))
+                            .foregroundColor(Theme.Colors.primary)
+                            .glow(color: Theme.Colors.primary, radius: 4)
+                    }
+                }
+                .padding(Theme.Spacing.md)
+                .background(Theme.Colors.surface)
+
+                // Messages List
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVStack(spacing: Theme.Spacing.md) {
+                            ForEach(messages) { message in
+                                ModernMessageBubble(
+                                    message: message,
+                                    isFromCurrentUser: message.sender != peer.displayName
+                                )
                                 .id(message.id)
+                            }
+                        }
+                        .padding(Theme.Spacing.md)
+                    }
+                    .onChange(of: messages.count) {
+                        if let lastMessage = messages.last {
+                            withAnimation {
+                                proxy.scrollTo(lastMessage.id, anchor: .bottom)
+                            }
                         }
                     }
-                    .padding()
                 }
-                .onChange(of: messages.count) { _ in
-                    if let lastMessage = messages.last {
-                        withAnimation {
-                            proxy.scrollTo(lastMessage.id, anchor: .bottom)
-                        }
+
+                // Input Bar
+                HStack(spacing: Theme.Spacing.md) {
+                    // Text field
+                    HStack(spacing: Theme.Spacing.sm) {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 12))
+                            .foregroundColor(Theme.Colors.primary)
+
+                        TextField("Encrypted message...", text: $messageText)
+                            .font(Theme.Typography.body)
+                            .foregroundColor(Theme.Colors.textPrimary)
+                            .onSubmit(sendMessage)
                     }
-                }
-            }
+                    .padding(.horizontal, Theme.Spacing.md)
+                    .padding(.vertical, Theme.Spacing.sm)
+                    .background(Theme.Colors.surface)
+                    .cornerRadius(Theme.CornerRadius.lg)
 
-            Divider()
+                    // Send button
+                    Button(action: sendMessage) {
+                        ZStack {
+                            Circle()
+                                .fill(messageText.isEmpty ? Theme.Colors.surface : Theme.Colors.primary)
+                                .frame(width: 44, height: 44)
 
-            // Input Bar
-            HStack(spacing: 12) {
-                TextField("Message", text: $messageText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .onSubmit(sendMessage)
-
-                Button(action: sendMessage) {
-                    Image(systemName: "arrow.up.circle.fill")
-                        .font(.title2)
-                        .foregroundColor(messageText.isEmpty ? .secondary : .accentColor)
+                            Image(systemName: "arrow.up")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(messageText.isEmpty ? Theme.Colors.textTertiary : Color.black)
+                        }
+                        .glow(
+                            color: messageText.isEmpty ? .clear : Theme.Colors.primary,
+                            radius: 8
+                        )
+                    }
+                    .disabled(messageText.isEmpty)
                 }
-                .disabled(messageText.isEmpty)
-            }
-            .padding()
-        }
-        .navigationTitle(peer.displayName)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { showSafetyCode.toggle() }) {
-                    Image(systemName: "checkmark.shield")
-                }
+                .padding(Theme.Spacing.md)
+                .background(Theme.Colors.background)
             }
         }
+        .navigationBarHidden(true)
         .sheet(isPresented: $showSafetyCode) {
-            SafetyCodeView(peerService: peerService, peer: peer)
+            ModernSafetyCodeView(peerService: peerService, peer: peer)
         }
         .onReceive(peerService.$receivedMessages) { receivedMessages in
             // Add received messages to store
@@ -98,43 +172,54 @@ struct ChatView: View {
     }
 }
 
-struct MessageBubble: View {
+struct ModernMessageBubble: View {
     let message: Message
     let isFromCurrentUser: Bool
 
     var body: some View {
         HStack {
             if isFromCurrentUser {
-                Spacer()
+                Spacer(minLength: 60)
             }
 
-            VStack(alignment: isFromCurrentUser ? .trailing : .leading, spacing: 4) {
+            VStack(alignment: isFromCurrentUser ? .trailing : .leading, spacing: 6) {
+                // Message content
                 Text(message.text)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 10)
-                    .background(isFromCurrentUser ? Color.accentColor : Color(.systemGray5))
-                    .foregroundColor(isFromCurrentUser ? .white : .primary)
-                    .cornerRadius(18)
+                    .font(Theme.Typography.body)
+                    .foregroundColor(isFromCurrentUser ? Color.black : Theme.Colors.textPrimary)
+                    .padding(.horizontal, Theme.Spacing.md)
+                    .padding(.vertical, Theme.Spacing.sm + 2)
+                    .background(
+                        isFromCurrentUser ?
+                        AnyView(Theme.Colors.messageSent) :
+                        AnyView(Theme.Colors.messageReceived)
+                    )
+                    .cornerRadius(Theme.CornerRadius.md)
+                    .shadow(color: Color.black.opacity(0.2), radius: 4, y: 2)
 
-                HStack(spacing: 4) {
+                // Metadata
+                HStack(spacing: 6) {
                     if message.isEncrypted {
                         Image(systemName: "lock.fill")
-                            .font(.caption2)
+                            .font(.system(size: 8))
+                            .foregroundColor(Theme.Colors.success)
                     }
+
                     Text(message.formattedTimestamp)
+                        .font(Theme.Typography.caption2)
+                        .foregroundColor(Theme.Colors.textTertiary)
                 }
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .padding(.horizontal, 4)
             }
 
             if !isFromCurrentUser {
-                Spacer()
+                Spacer(minLength: 60)
             }
         }
     }
 }
 
-struct SafetyCodeView: View {
+struct ModernSafetyCodeView: View {
     @ObservedObject var peerService: PeerService
     let peer: MCPeerID
     @Environment(\.dismiss) var dismiss
@@ -144,51 +229,102 @@ struct SafetyCodeView: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 24) {
-                Image(systemName: "checkmark.shield.fill")
-                    .font(.system(size: 60))
-                    .foregroundColor(.green)
+        ZStack {
+            Theme.Colors.background
+                .ignoresSafeArea()
 
-                Text("Safety Code")
-                    .font(.title2)
-                    .fontWeight(.bold)
+            VStack(spacing: Theme.Spacing.xl) {
+                // Header
+                HStack {
+                    Spacer()
 
-                Text("Compare this code with \(peer.displayName) to verify your connection is secure.")
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal)
-
-                Text(safetyCode)
-                    .font(.system(size: 32, weight: .bold, design: .monospaced))
-                    .tracking(2)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(12)
-
-                Text("If the codes match, your connection is encrypted and secure.")
-                    .font(.footnote)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal)
-
-                Spacer()
-            }
-            .padding()
-            .navigationTitle("Verify Connection")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        dismiss()
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 28))
+                            .foregroundColor(Theme.Colors.textSecondary)
                     }
                 }
+                .padding(Theme.Spacing.lg)
+
+                Spacer()
+
+                VStack(spacing: Theme.Spacing.xl) {
+                    // Icon
+                    ZStack {
+                        Circle()
+                            .fill(Theme.Colors.success.opacity(0.2))
+                            .frame(width: 120, height: 120)
+
+                        Image(systemName: "checkmark.shield.fill")
+                            .font(.system(size: 60))
+                            .foregroundColor(Theme.Colors.success)
+                            .glow(color: Theme.Colors.success, radius: 20)
+                    }
+
+                    VStack(spacing: Theme.Spacing.sm) {
+                        Text("SAFETY CODE")
+                            .font(Theme.Typography.caption)
+                            .foregroundColor(Theme.Colors.textTertiary)
+                            .tracking(3)
+
+                        Text("Verify Connection")
+                            .font(Theme.Typography.title)
+                            .foregroundColor(Theme.Colors.textPrimary)
+                    }
+
+                    Text("Compare this code with \(peer.displayName) to ensure your connection is secure and encrypted.")
+                        .font(Theme.Typography.callout)
+                        .foregroundColor(Theme.Colors.textSecondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, Theme.Spacing.xl)
+
+                    // Safety code
+                    VStack(spacing: Theme.Spacing.sm) {
+                        Text(safetyCode)
+                            .font(Theme.Typography.monoLarge)
+                            .foregroundColor(Theme.Colors.primary)
+                            .tracking(4)
+                            .padding(Theme.Spacing.lg)
+                            .background(Theme.Colors.surface)
+                            .cornerRadius(Theme.CornerRadius.md)
+                            .glow(color: Theme.Colors.primary, radius: 8)
+
+                        HStack(spacing: 8) {
+                            Image(systemName: "lock.shield.fill")
+                                .font(.system(size: 12))
+                                .foregroundColor(Theme.Colors.success)
+
+                            Text("End-to-end encrypted")
+                                .font(Theme.Typography.caption)
+                                .foregroundColor(Theme.Colors.success)
+                        }
+                    }
+                }
+
+                Spacer()
+
+                // Info
+                VStack(spacing: Theme.Spacing.sm) {
+                    HStack(spacing: Theme.Spacing.sm) {
+                        Image(systemName: "info.circle.fill")
+                            .foregroundColor(Theme.Colors.secondary)
+
+                        Text("Codes must match on both devices")
+                            .font(Theme.Typography.footnote)
+                            .foregroundColor(Theme.Colors.textSecondary)
+                    }
+                    .padding(Theme.Spacing.md)
+                    .background(Theme.Colors.surface)
+                    .cornerRadius(Theme.CornerRadius.sm)
+                }
+                .padding(.horizontal, Theme.Spacing.lg)
+                .padding(.bottom, Theme.Spacing.xl)
             }
         }
     }
 }
 
 #Preview {
-    ChatView(peer: MCPeerID(displayName: "Test Device"), messageStore: MessageStore())
+    ChatView(messageStore: MessageStore(), peer: MCPeerID(displayName: "Test Device"))
         .environmentObject(PeerService())
 }

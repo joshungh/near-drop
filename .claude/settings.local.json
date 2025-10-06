@@ -4,7 +4,15 @@
       "Bash(textutil:*)",
       "Bash(git init:*)",
       "Bash(git config:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(open:*)",
+      "Bash(swift package init:*)",
+      "Bash(chmod:*)",
+      "Bash(cat:*)",
+      "Bash(killall:*)"
     ],
     "deny": [],
     "ask": []

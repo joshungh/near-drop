@@ -6,38 +6,95 @@ struct ChatsListView: View {
     @StateObject private var messageStore = MessageStore()
 
     var body: some View {
-        NavigationView {
-            Group {
-                if peerService.connectedPeers.isEmpty {
-                    VStack(spacing: 16) {
-                        Image(systemName: "message.circle")
-                            .font(.system(size: 60))
-                            .foregroundColor(.secondary)
+        ZStack {
+            Theme.Colors.background
+                .ignoresSafeArea()
 
-                        Text("No Active Chats")
-                            .font(.title3)
-                            .fontWeight(.semibold)
+            VStack(spacing: 0) {
+                // Header
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("MESSAGES")
+                            .font(Theme.Typography.caption)
+                            .foregroundColor(Theme.Colors.textTertiary)
+                            .tracking(2)
 
-                        Text("Connect to a nearby device to start chatting")
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
+                        Text("Encrypted Channels")
+                            .font(Theme.Typography.title2)
+                            .foregroundColor(Theme.Colors.textPrimary)
                     }
-                    .frame(maxHeight: .infinity)
-                } else {
-                    List(peerService.connectedPeers, id: \.self) { peer in
-                        NavigationLink(destination: ChatView(peer: peer, messageStore: messageStore)) {
-                            ChatListRow(peerName: peer.displayName, messageStore: messageStore)
+
+                    Spacer()
+
+                    // Connection count badge
+                    if !peerService.connectedPeers.isEmpty {
+                        HStack(spacing: 6) {
+                            Circle()
+                                .fill(Theme.Colors.success)
+                                .frame(width: 8, height: 8)
+
+                            Text("\(peerService.connectedPeers.count)")
+                                .font(Theme.Typography.headline)
+                                .foregroundColor(Theme.Colors.success)
                         }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(Theme.Colors.success.opacity(0.15))
+                        .cornerRadius(Theme.CornerRadius.full)
+                    }
+                }
+                .padding(Theme.Spacing.lg)
+
+                if peerService.connectedPeers.isEmpty {
+                    // Empty state
+                    VStack(spacing: Theme.Spacing.xl) {
+                        Spacer()
+
+                        ZStack {
+                            Circle()
+                                .fill(Theme.Colors.surface)
+                                .frame(width: 120, height: 120)
+
+                            Image(systemName: "message.badge.filled.fill")
+                                .font(.system(size: 50))
+                                .foregroundColor(Theme.Colors.textTertiary)
+                        }
+
+                        VStack(spacing: Theme.Spacing.sm) {
+                            Text("No Active Channels")
+                                .font(Theme.Typography.title2)
+                                .foregroundColor(Theme.Colors.textPrimary)
+
+                            Text("Connect to nearby devices to start encrypted messaging")
+                                .font(Theme.Typography.callout)
+                                .foregroundColor(Theme.Colors.textSecondary)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, Theme.Spacing.xl)
+                        }
+
+                        Spacer()
+                    }
+                } else {
+                    // Chats list
+                    ScrollView {
+                        VStack(spacing: Theme.Spacing.md) {
+                            ForEach(peerService.connectedPeers, id: \.self) { peer in
+                                NavigationLink(destination: ChatView(messageStore: messageStore, peer: peer)) {
+                                    ModernChatListRow(peerName: peer.displayName, messageStore: messageStore)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                        }
+                        .padding(Theme.Spacing.md)
                     }
                 }
             }
-            .navigationTitle("Chats")
         }
+        .navigationBarHidden(true)
     }
 }
 
-struct ChatListRow: View {
+struct ModernChatListRow: View {
     let peerName: String
     @ObservedObject var messageStore: MessageStore
 
@@ -46,36 +103,67 @@ struct ChatListRow: View {
     }
 
     var body: some View {
-        HStack {
-            Image(systemName: "person.crop.circle.fill")
-                .font(.title2)
-                .foregroundColor(.accentColor)
+        HStack(spacing: Theme.Spacing.md) {
+            // Avatar
+            ZStack {
+                Circle()
+                    .fill(
+                        LinearGradient(
+                            colors: [Theme.Colors.primary, Theme.Colors.secondary],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: 50, height: 50)
 
-            VStack(alignment: .leading, spacing: 4) {
-                Text(peerName)
-                    .fontWeight(.semibold)
+                Image(systemName: "person.fill")
+                    .font(.system(size: 22))
+                    .foregroundColor(Color.black)
+            }
+            .glow(color: Theme.Colors.success, radius: 6)
+
+            // Info
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: Theme.Spacing.sm) {
+                    Text(peerName)
+                        .font(Theme.Typography.headline)
+                        .foregroundColor(Theme.Colors.textPrimary)
+
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 10))
+                        .foregroundColor(Theme.Colors.success)
+                }
 
                 if let lastMessage = conversation?.lastMessage {
                     Text(lastMessage.text)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .font(Theme.Typography.subheadline)
+                        .foregroundColor(Theme.Colors.textSecondary)
                         .lineLimit(1)
                 } else {
-                    Text("Start a conversation")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                    Text("New encrypted channel")
+                        .font(Theme.Typography.subheadline)
+                        .foregroundColor(Theme.Colors.textTertiary)
+                        .italic()
                 }
             }
 
             Spacer()
 
-            if let lastMessage = conversation?.lastMessage {
-                Text(lastMessage.formattedTimestamp)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+            // Metadata
+            VStack(alignment: .trailing, spacing: 6) {
+                if let lastMessage = conversation?.lastMessage {
+                    Text(lastMessage.formattedTimestamp)
+                        .font(Theme.Typography.caption2)
+                        .foregroundColor(Theme.Colors.textTertiary)
+                }
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14))
+                    .foregroundColor(Theme.Colors.textTertiary)
             }
         }
-        .padding(.vertical, 4)
+        .padding(Theme.Spacing.md)
+        .cardStyle()
     }
 }
 

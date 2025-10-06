@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21A3C28F2E937B6300916E3B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A3C28E2E937B6300916E3B /* Theme.swift */; };
 		AA0001 /* NearDropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0001 /* NearDropApp.swift */; };
 		AA0002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0002 /* ContentView.swift */; };
 		AA0003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0003 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21A3C28E2E937B6300916E3B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		BB0001 /* NearDropApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearDropApp.swift; sourceTree = "<group>"; };
 		BB0002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BB0003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,12 +52,13 @@
 		EE0001 = {
 			isa = PBXGroup;
 			children = (
-				EE0002 /* NearDrop */,
+				21A3C28E2E937B6300916E3B /* Theme.swift */,
+				EE0002 /* NearDrop/NearDrop */,
 				EE0003 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		EE0002 /* NearDrop */ = {
+		EE0002 /* NearDrop/NearDrop */ = {
 			isa = PBXGroup;
 			children = (
 				BB0012 /* Info.plist */,
@@ -66,7 +69,7 @@
 				EE0007 /* Views */,
 				EE0008 /* Resources */,
 			);
-			path = NearDrop;
+			path = NearDrop/NearDrop;
 			sourceTree = "<group>";
 		};
 		EE0003 /* Products */ = {
@@ -195,6 +198,7 @@
 				AA0002 /* ContentView.swift in Sources */,
 				AA0004 /* CryptoKitWrapper.swift in Sources */,
 				AA0005 /* PeerService.swift in Sources */,
+				21A3C28F2E937B6300916E3B /* Theme.swift in Sources */,
 				AA0006 /* MessageStore.swift in Sources */,
 				AA0007 /* Message.swift in Sources */,
 				AA0008 /* DiscoveryView.swift in Sources */,
@@ -333,10 +337,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 75A5D8XP3F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = NearDrop/Info.plist;
+				INFOPLIST_FILE = NearDrop/NearDrop/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -365,10 +369,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 75A5D8XP3F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = NearDrop/Info.plist;
+				INFOPLIST_FILE = NearDrop/NearDrop/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
